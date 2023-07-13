@@ -23,6 +23,7 @@ module Twitter
     def request_headers
       headers = {}
       headers[:user_agent] = @client.user_agent
+      # headers['Content-Type'] = 'application/json'
       if bearer_token_request?
         headers[:accept]        = "*/*"
         headers[:authorization] = bearer_token_credentials_auth_header

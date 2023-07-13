@@ -61,7 +61,7 @@ module Twitter
       # @param options [Hash]
       # @param klass [Class]
       def perform_post_with_object(path, options, klass)
-        perform_request_with_object(:post, path, options, klass)
+        perform_request_with_object(:json_post, path, options, klass)
       end
 
       # @param request_method [Symbol]
@@ -70,7 +70,7 @@ module Twitter
       # @param klass [Class]
       def perform_request_with_object(request_method, path, options, klass, params = nil)
         response = perform_request(request_method, path, options, params)
-        klass.new(response)
+        klass.new(response[:data])
       end
 
       # @param path [String]
