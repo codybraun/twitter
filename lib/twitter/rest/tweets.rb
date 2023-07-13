@@ -100,7 +100,7 @@ module Twitter
       def destroy_status(*args)
         arguments = Twitter::Arguments.new(args)
         pmap(arguments) do |tweet|
-          perform_post_with_object("/2/statuses/destroy/#{extract_id(tweet)}.json", arguments.options, Twitter::Tweet)
+          perform_request(:delete, "/2/tweets/#{extract_id(tweet)}", arguments.options)
         end
       end
       alias destroy_tweet destroy_status
