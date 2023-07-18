@@ -137,7 +137,7 @@ client.status(27558893223)
 
 ```ruby
 client.search("to:justinbieber marry me", result_type: "recent").take(3).collect do |tweet|
-  "#{tweet.user.screen_name}: #{tweet.text}"
+  "#{tweet.user.username}: #{tweet.text}"
 end
 ```
 **Find a Japanese-language Tweet tagged #ruby (excluding retweets)**

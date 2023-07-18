@@ -428,7 +428,7 @@ describe Twitter::Tweet do
 
   describe "#uri" do
     it "returns the URI to the tweet" do
-      tweet = described_class.new(id: 28_669_546_014, user: {id: 7_505_382, screen_name: "sferik"})
+      tweet = described_class.new(id: 28_669_546_014, user: {id: 7_505_382, username: "sferik"})
       expect(tweet.uri).to be_an Addressable::URI
       expect(tweet.uri.to_s).to eq("https://twitter.com/sferik/status/28669546014")
     end
@@ -481,7 +481,7 @@ describe Twitter::Tweet do
     it "returns an array of Entity::UserMention when entities are set" do
       user_mentions_array = [
         {
-          screen_name: "sferik",
+          username: "sferik",
           name: "Erik Berlin",
           id_str: "7_505_382",
           indices: [0, 6],
@@ -503,7 +503,7 @@ describe Twitter::Tweet do
 
   describe "#user_mentions?" do
     it "returns true when the tweet includes user_mention entities" do
-      entities = {user_mentions: [{screen_name: "sferik"}]}
+      entities = {user_mentions: [{username: "sferik"}]}
       tweet = described_class.new(id: 28_669_546_014, entities: entities)
       expect(tweet.user_mentions?).to be true
     end

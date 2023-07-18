@@ -48,7 +48,7 @@ module Twitter
         cursor_from_response_with_user(:ids, nil, "/2/followers/ids.json", args)
       end
 
-      # Returns the relationship of the authenticating user to the comma separated list of up to 100 screen_names or user_ids provided. Values for connections can be: following, following_requested, followed_by, none.
+      # Returns the relationship of the authenticating user to the comma separated list of up to 100 usernames or user_ids provided. Values for connections can be: following, following_requested, followed_by, none.
       #
       # @see https://dev.twitter.com/rest/reference/get/friendships/lookup
       # @rate_limited Yes

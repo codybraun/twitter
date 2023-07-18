@@ -3,8 +3,8 @@ require "helper"
 describe Twitter::User do
   describe "#==" do
     it "returns true when objects IDs are the same" do
-      user = described_class.new(id: 1, screen_name: "foo")
-      other = described_class.new(id: 1, screen_name: "bar")
+      user = described_class.new(id: 1, username: "foo")
+      other = described_class.new(id: 1, username: "bar")
       expect(user == other).to be true
     end
 
@@ -414,7 +414,7 @@ describe Twitter::User do
 
   describe "#uri" do
     it "returns the URI to the user" do
-      user = described_class.new(id: 7_505_382, screen_name: "sferik")
+      user = described_class.new(id: 7_505_382, username: "sferik")
       expect(user.uri).to be_an Addressable::URI
       expect(user.uri.to_s).to eq("https://twitter.com/sferik")
     end

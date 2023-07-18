@@ -8,12 +8,12 @@ describe Twitter::REST::Favorites do
   describe "#favorites" do
     context "with a screen name passed" do
       before do
-        stub_get("/2/favorites/list.json").with(query: {screen_name: "sferik"}).to_return(body: fixture("user_timeline.json"), headers: {content_type: "application/json; charset=utf-8"})
+        stub_get("/2/favorites/list.json").with(query: {username: "sferik"}).to_return(body: fixture("user_timeline.json"), headers: {content_type: "application/json; charset=utf-8"})
       end
 
       it "requests the correct resource" do
         @client.favorites("sferik")
-        expect(a_get("/2/favorites/list.json").with(query: {screen_name: "sferik"})).to have_been_made
+        expect(a_get("/2/favorites/list.json").with(query: {username: "sferik"})).to have_been_made
       end
 
       it "returns the 20 most recent favorite Tweets for the authenticating user or user specified by the ID parameter" do
@@ -27,7 +27,7 @@ describe Twitter::REST::Favorites do
         it "requests the correct resource" do
           user = URI.parse("https://twitter.com/sferik")
           @client.favorites(user)
-          expect(a_get("/2/favorites/list.json").with(query: {screen_name: "sferik"})).to have_been_made
+          expect(a_get("/2/favorites/list.json").with(query: {username: "sferik"})).to have_been_made
         end
       end
     end

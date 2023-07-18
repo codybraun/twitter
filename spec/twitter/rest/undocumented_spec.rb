@@ -6,14 +6,14 @@ describe Twitter::REST::Undocumented do
   end
 
   describe "#following_followers_of" do
-    context "with a screen_name passed" do
+    context "with a username passed" do
       before do
-        stub_get("/users/following_followers_of.json").with(query: {screen_name: "sferik", cursor: "-1"}).to_return(body: fixture("users_list.json"), headers: {content_type: "application/json; charset=utf-8"})
+        stub_get("/users/following_followers_of.json").with(query: {username: "sferik", cursor: "-1"}).to_return(body: fixture("users_list.json"), headers: {content_type: "application/json; charset=utf-8"})
       end
 
       it "requests the correct resource" do
         @client.following_followers_of("sferik")
-        expect(a_get("/users/following_followers_of.json").with(query: {screen_name: "sferik", cursor: "-1"})).to have_been_made
+        expect(a_get("/users/following_followers_of.json").with(query: {username: "sferik", cursor: "-1"})).to have_been_made
       end
 
       it "returns an array of numeric IDs for every user following the specified user" do
@@ -24,13 +24,13 @@ describe Twitter::REST::Undocumented do
 
       context "with each" do
         before do
-          stub_get("/users/following_followers_of.json").with(query: {screen_name: "sferik", cursor: "1322801608223717003"}).to_return(body: fixture("users_list2.json"), headers: {content_type: "application/json; charset=utf-8"})
+          stub_get("/users/following_followers_of.json").with(query: {username: "sferik", cursor: "1322801608223717003"}).to_return(body: fixture("users_list2.json"), headers: {content_type: "application/json; charset=utf-8"})
         end
 
         it "requests the correct resource" do
           @client.following_followers_of("sferik").each {}
-          expect(a_get("/users/following_followers_of.json").with(query: {screen_name: "sferik", cursor: "-1"})).to have_been_made
-          expect(a_get("/users/following_followers_of.json").with(query: {screen_name: "sferik", cursor: "1322801608223717003"})).to have_been_made
+          expect(a_get("/users/following_followers_of.json").with(query: {username: "sferik", cursor: "-1"})).to have_been_made
+          expect(a_get("/users/following_followers_of.json").with(query: {username: "sferik", cursor: "1322801608223717003"})).to have_been_made
         end
       end
     end

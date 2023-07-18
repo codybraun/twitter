@@ -471,7 +471,7 @@ https://github.com/sferik/twitter/compare/v6.0.0...v6.1.0
 * [Merge `Twitter::Client` modules into a monolithic `Twitter::Client` class](https://github.com/sferik/twitter/commit/396bb15fe8a273e01370e6a22efbf1e7f6a7805e)
 * [Add `Twitter::Status#full_text`](https://github.com/sferik/twitter/commit/a03eb945df6a58f92cc832f5ffc1c8973c57339e)
 * [Add `profile_image_url_https` accessor to `Twitter::Status`](https://github.com/sferik/twitter/commit/5991fa395fcd94bb88e88ed6c9bfae51896978b5) ([@terryjray](https://twitter.com/terryjray))
-* [Make `Status#screen_name` return `from_user` attribute and vice versa](https://github.com/sferik/twitter/commit/82afc66a342c51258f80d1ba26959358be1a9c73)
+* [Make `Status#username` return `from_user` attribute and vice versa](https://github.com/sferik/twitter/commit/82afc66a342c51258f80d1ba26959358be1a9c73)
 * [Add `created_at` attribute to `Twitter::List`](https://github.com/sferik/twitter/commit/6d408ead1cfa83dd0539fe771495b5f5e594282e)
 * [Add ability to pass a user to `Twitter::Client#recommendations`](https://github.com/sferik/twitter/commit/19f5796ba618e634ed56e936eb8f3bcb9822124c)
 * [Alias `trends` to `local_trends`](https://github.com/sferik/twitter/commit/b4eb89c33a6b00f9fd685fd7dc95b79ee9e403bb) ([@Tricon](https://twitter.com/Tricon))
@@ -583,12 +583,12 @@ https://github.com/sferik/twitter/compare/v6.0.0...v6.1.0
 
 1.1.1
 -----
-* [Don't set cached `screen_name` when creating a new API client](https://github.com/sferik/twitter/commit/ceeed993b16f95582c648e93de03738362ba1d7b)
+* [Don't set cached `username` when creating a new API client](https://github.com/sferik/twitter/commit/ceeed993b16f95582c648e93de03738362ba1d7b)
 
 1.1.0
 -----
-* [Overload all methods that require a `screen_name` parameter](https://github.com/sferik/twitter/compare/ecd647e414ac0b0cae96...59cf052ca646a2b79446) ([@gabriel_somoza](https://twitter.com/gabriel_somoza))
-* [Rename `user_screen_name` to `screen_name`](https://github.com/sferik/twitter/commit/4fb4f8a28c967f7d5a2cf295b34548a346900cfd) ([@jalada](https://twitter.com/jalada))
+* [Overload all methods that require a `username` parameter](https://github.com/sferik/twitter/compare/ecd647e414ac0b0cae96...59cf052ca646a2b79446) ([@gabriel_somoza](https://twitter.com/gabriel_somoza))
+* [Rename `user_username` to `username`](https://github.com/sferik/twitter/commit/4fb4f8a28c967f7d5a2cf295b34548a346900cfd) ([@jalada](https://twitter.com/jalada))
 * [Handle error returns from lookup](https://github.com/sferik/twitter/commit/0553cdbe262f006fae149309ce51a03985ed8fd2) ([@leshill](https://twitter.com/leshill))
 * [Use 'tude' parameter for attitudes](https://github.com/sferik/twitter/commit/8db1bf9dadec3a660a281c94cab2fc335891ce30) ([@ALindeman](https://twitter.com/ALindeman))
 * [Add Enumerable mixin to Twitter::Search](https://github.com/sferik/twitter/commit/c175c15d320d10db542ebb4cc13c5f5d583c89c4) ([@ALindeman](https://twitter.com/ALindeman))

@@ -43,7 +43,7 @@ module Twitter
       #   @option options [Integer] :count Specifies the number of records to retrieve. Must be less than or equal to 200.
       #   @option options [Boolean, String, Integer] :trim_user Each tweet returned in a timeline will include a user object with only the author's numerical ID when set to true, 't' or 1.
       #   @option options [Boolean, String, Integer] :exclude_replies This parameter will prevent replies from appearing in the returned timeline. Using exclude_replies with the count parameter will mean you will receive up-to count tweets - this is because the count parameter retrieves that many tweets before filtering out retweets and replies.
-      #   @option options [Boolean, String, Integer] :contributor_details Specifies that the contributors element should be enhanced to include the screen_name of the contributor.
+      #   @option options [Boolean, String, Integer] :contributor_details Specifies that the contributors element should be enhanced to include the username of the contributor.
       #   @option options [Boolean, String, Integer] :include_rts Specifies that the timeline should include native retweets in addition to regular tweets. Note: If you're using the trim_user parameter in conjunction with include_rts, the retweets will no longer contain a full user object.
       def user_timeline(*args)
         objects_from_response_with_user(Twitter::Tweet, :get, "/2/statuses/user_timeline.json", args)
@@ -64,7 +64,7 @@ module Twitter
       # @option options [Integer] :count Specifies the number of records to retrieve. Must be less than or equal to 200.
       # @option options [Boolean, String, Integer] :trim_user Each tweet returned in a timeline will include a user object with only the author's numerical ID when set to true, 't' or 1.
       # @option options [Boolean, String, Integer] :exclude_replies This parameter will prevent replies from appearing in the returned timeline. Using exclude_replies with the count parameter will mean you will receive up-to count tweets - this is because the count parameter retrieves that many tweets before filtering out retweets and replies.
-      # @option options [Boolean, String, Integer] :contributor_details Specifies that the contributors element should be enhanced to include the screen_name of the contributor.
+      # @option options [Boolean, String, Integer] :contributor_details Specifies that the contributors element should be enhanced to include the username of the contributor.
       def retweeted_by_user(user, options = {})
         retweets_from_timeline(options) do |opts|
           user_timeline(user, opts)
@@ -86,7 +86,7 @@ module Twitter
       # @option options [Integer] :count Specifies the number of records to retrieve. Must be less than or equal to 200.
       # @option options [Boolean, String, Integer] :trim_user Each tweet returned in a timeline will include a user object with only the author's numerical ID when set to true, 't' or 1.
       # @option options [Boolean, String, Integer] :exclude_replies This parameter will prevent replies from appearing in the returned timeline. Using exclude_replies with the count parameter will mean you will receive up-to count tweets - this is because the count parameter retrieves that many tweets before filtering out retweets and replies.
-      # @option options [Boolean, String, Integer] :contributor_details Specifies that the contributors element should be enhanced to include the screen_name of the contributor.
+      # @option options [Boolean, String, Integer] :contributor_details Specifies that the contributors element should be enhanced to include the username of the contributor.
       def retweeted_by_me(options = {})
         retweets_from_timeline(options) do |opts|
           user_timeline(opts)
@@ -108,7 +108,7 @@ module Twitter
       # @option options [Boolean, String, Integer] :trim_user Each tweet returned in a timeline will include a user object with only the author's numerical ID when set to true, 't' or 1.
       # @option options [Boolean, String, Integer] :exclude_replies This parameter will prevent replies from appearing in the returned timeline. Using exclude_replies with the count parameter will mean you will receive up-to count tweets - this is because the count parameter retrieves that many tweets before filtering out retweets and replies.
       # @option options [Boolean, String, Integer] :include_rts Specifies that the timeline should include native retweets in addition to regular tweets. Note: If you're using the trim_user parameter in conjunction with include_rts, the retweets will no longer contain a full user object.
-      # @option options [Boolean, String, Integer] :contributor_details Specifies that the contributors element should be enhanced to include the screen_name of the contributor.
+      # @option options [Boolean, String, Integer] :contributor_details Specifies that the contributors element should be enhanced to include the username of the contributor.
       def home_timeline(options = {})
         perform_get_with_objects("/2/statuses/home_timeline.json", options, Twitter::Tweet)
       end
@@ -127,7 +127,7 @@ module Twitter
       # @option options [Integer] :count Specifies the number of records to retrieve. Must be less than or equal to 200.
       # @option options [Boolean, String, Integer] :trim_user Each tweet returned in a timeline will include a user object with only the author's numerical ID when set to true, 't' or 1.
       # @option options [Boolean, String, Integer] :exclude_replies This parameter will prevent replies from appearing in the returned timeline. Using exclude_replies with the count parameter will mean you will receive up-to count tweets - this is because the count parameter retrieves that many tweets before filtering out retweets and replies.
-      # @option options [Boolean, String, Integer] :contributor_details Specifies that the contributors element should be enhanced to include the screen_name of the contributor.
+      # @option options [Boolean, String, Integer] :contributor_details Specifies that the contributors element should be enhanced to include the username of the contributor.
       def retweeted_to_me(options = {})
         retweets_from_timeline(options) do |opts|
           home_timeline(opts)

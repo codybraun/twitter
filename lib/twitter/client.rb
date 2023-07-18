@@ -18,7 +18,7 @@ module Twitter
       end
       yield(self) if block_given?
     end
-
+  
     # @return [Boolean]
     def user_token?
       !(blank_string?(access_token) || blank_string?(access_token_secret))

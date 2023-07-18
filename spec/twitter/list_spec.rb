@@ -48,21 +48,21 @@ describe Twitter::List do
 
   describe "#members_uri" do
     it "returns the URI to the list members" do
-      list = described_class.new(id: 8_863_586, slug: "presidents", user: {id: 7_505_382, screen_name: "sferik"})
+      list = described_class.new(id: 8_863_586, slug: "presidents", user: {id: 7_505_382, username: "sferik"})
       expect(list.members_uri.to_s).to eq("https://twitter.com/sferik/presidents/members")
     end
   end
 
   describe "#subscribers_uri" do
     it "returns the URI to the list subscribers" do
-      list = described_class.new(id: 8_863_586, slug: "presidents", user: {id: 7_505_382, screen_name: "sferik"})
+      list = described_class.new(id: 8_863_586, slug: "presidents", user: {id: 7_505_382, username: "sferik"})
       expect(list.subscribers_uri.to_s).to eq("https://twitter.com/sferik/presidents/subscribers")
     end
   end
 
   describe "#uri" do
     it "returns the URI to the list" do
-      list = described_class.new(id: 8_863_586, slug: "presidents", user: {id: 7_505_382, screen_name: "sferik"})
+      list = described_class.new(id: 8_863_586, slug: "presidents", user: {id: 7_505_382, username: "sferik"})
       expect(list.uri.to_s).to eq("https://twitter.com/sferik/presidents")
     end
   end

@@ -8,12 +8,12 @@ describe Twitter::REST::FriendsAndFollowers do
   describe "#friend_ids" do
     context "with a screen name passed" do
       before do
-        stub_get("/2/friends/ids.json").with(query: {screen_name: "sferik", cursor: "-1"}).to_return(body: fixture("ids_list.json"), headers: {content_type: "application/json; charset=utf-8"})
+        stub_get("/2/friends/ids.json").with(query: {username: "sferik", cursor: "-1"}).to_return(body: fixture("ids_list.json"), headers: {content_type: "application/json; charset=utf-8"})
       end
 
       it "requests the correct resource" do
         @client.friend_ids("sferik")
-        expect(a_get("/2/friends/ids.json").with(query: {screen_name: "sferik", cursor: "-1"})).to have_been_made
+        expect(a_get("/2/friends/ids.json").with(query: {username: "sferik", cursor: "-1"})).to have_been_made
       end
 
       it "returns an array of numeric IDs for every user the specified user is following" do
@@ -24,13 +24,13 @@ describe Twitter::REST::FriendsAndFollowers do
 
       context "with each" do
         before do
-          stub_get("/2/friends/ids.json").with(query: {screen_name: "sferik", cursor: "1305102810874389703"}).to_return(body: fixture("ids_list2.json"), headers: {content_type: "application/json; charset=utf-8"})
+          stub_get("/2/friends/ids.json").with(query: {username: "sferik", cursor: "1305102810874389703"}).to_return(body: fixture("ids_list2.json"), headers: {content_type: "application/json; charset=utf-8"})
         end
 
         it "requests the correct resource" do
           @client.friend_ids("sferik").each {}
-          expect(a_get("/2/friends/ids.json").with(query: {screen_name: "sferik", cursor: "-1"})).to have_been_made
-          expect(a_get("/2/friends/ids.json").with(query: {screen_name: "sferik", cursor: "1305102810874389703"})).to have_been_made
+          expect(a_get("/2/friends/ids.json").with(query: {username: "sferik", cursor: "-1"})).to have_been_made
+          expect(a_get("/2/friends/ids.json").with(query: {username: "sferik", cursor: "1305102810874389703"})).to have_been_made
         end
       end
     end
@@ -94,12 +94,12 @@ describe Twitter::REST::FriendsAndFollowers do
   describe "#follower_ids" do
     context "with a screen name passed" do
       before do
-        stub_get("/2/followers/ids.json").with(query: {screen_name: "sferik", cursor: "-1"}).to_return(body: fixture("ids_list.json"), headers: {content_type: "application/json; charset=utf-8"})
+        stub_get("/2/followers/ids.json").with(query: {username: "sferik", cursor: "-1"}).to_return(body: fixture("ids_list.json"), headers: {content_type: "application/json; charset=utf-8"})
       end
 
       it "requests the correct resource" do
         @client.follower_ids("sferik")
-        expect(a_get("/2/followers/ids.json").with(query: {screen_name: "sferik", cursor: "-1"})).to have_been_made
+        expect(a_get("/2/followers/ids.json").with(query: {username: "sferik", cursor: "-1"})).to have_been_made
       end
 
       it "returns an array of numeric IDs for every user following the specified user" do
@@ -110,13 +110,13 @@ describe Twitter::REST::FriendsAndFollowers do
 
       context "with each" do
         before do
-          stub_get("/2/followers/ids.json").with(query: {screen_name: "sferik", cursor: "1305102810874389703"}).to_return(body: fixture("ids_list2.json"), headers: {content_type: "application/json; charset=utf-8"})
+          stub_get("/2/followers/ids.json").with(query: {username: "sferik", cursor: "1305102810874389703"}).to_return(body: fixture("ids_list2.json"), headers: {content_type: "application/json; charset=utf-8"})
         end
 
         it "requests the correct resource" do
           @client.follower_ids("sferik").each {}
-          expect(a_get("/2/followers/ids.json").with(query: {screen_name: "sferik", cursor: "-1"})).to have_been_made
-          expect(a_get("/2/followers/ids.json").with(query: {screen_name: "sferik", cursor: "1305102810874389703"})).to have_been_made
+          expect(a_get("/2/followers/ids.json").with(query: {username: "sferik", cursor: "-1"})).to have_been_made
+          expect(a_get("/2/followers/ids.json").with(query: {username: "sferik", cursor: "1305102810874389703"})).to have_been_made
         end
       end
     end
@@ -180,12 +180,12 @@ describe Twitter::REST::FriendsAndFollowers do
   describe "#friendships" do
     context "with screen names passed" do
       before do
-        stub_get("/2/friendships/lookup.json").with(query: {screen_name: "sferik,pengwynn"}).to_return(body: fixture("friendships.json"), headers: {content_type: "application/json; charset=utf-8"})
+        stub_get("/2/friendships/lookup.json").with(query: {username: "sferik,pengwynn"}).to_return(body: fixture("friendships.json"), headers: {content_type: "application/json; charset=utf-8"})
       end
 
       it "requests the correct resource" do
         @client.friendships("sferik", "pengwynn")
-        expect(a_get("/2/friendships/lookup.json").with(query: {screen_name: "sferik,pengwynn"})).to have_been_made
+        expect(a_get("/2/friendships/lookup.json").with(query: {username: "sferik,pengwynn"})).to have_been_made
       end
 
       it "returns up to 100 users worth of extended information" do
@@ -199,12 +199,12 @@ describe Twitter::REST::FriendsAndFollowers do
 
     context "with numeric screen names passed" do
       before do
-        stub_get("/2/friendships/lookup.json").with(query: {screen_name: "0,311"}).to_return(body: fixture("friendships.json"), headers: {content_type: "application/json; charset=utf-8"})
+        stub_get("/2/friendships/lookup.json").with(query: {username: "0,311"}).to_return(body: fixture("friendships.json"), headers: {content_type: "application/json; charset=utf-8"})
       end
 
       it "requests the correct resource" do
         @client.friendships("0", "311")
-        expect(a_get("/2/friendships/lookup.json").with(query: {screen_name: "0,311"})).to have_been_made
+        expect(a_get("/2/friendships/lookup.json").with(query: {username: "0,311"})).to have_been_made
       end
     end
 
@@ -221,12 +221,12 @@ describe Twitter::REST::FriendsAndFollowers do
 
     context "with both screen names and user IDs passed" do
       before do
-        stub_get("/2/friendships/lookup.json").with(query: {screen_name: "sferik", user_id: "14100886"}).to_return(body: fixture("friendships.json"), headers: {content_type: "application/json; charset=utf-8"})
+        stub_get("/2/friendships/lookup.json").with(query: {username: "sferik", user_id: "14100886"}).to_return(body: fixture("friendships.json"), headers: {content_type: "application/json; charset=utf-8"})
       end
 
       it "requests the correct resource" do
         @client.friendships("sferik", 14_100_886)
-        expect(a_get("/2/friendships/lookup.json").with(query: {screen_name: "sferik", user_id: "14100886"})).to have_been_made
+        expect(a_get("/2/friendships/lookup.json").with(query: {username: "sferik", user_id: "14100886"})).to have_been_made
       end
     end
   end
@@ -291,7 +291,7 @@ describe Twitter::REST::FriendsAndFollowers do
     before do
       stub_get("/2/account/verify_credentials.json").with(query: {skip_status: "true"}).to_return(body: fixture("sferik.json"), headers: {content_type: "application/json; charset=utf-8"})
       stub_get("/2/friends/ids.json").with(query: {user_id: "7505382", cursor: "-1"}).to_return(body: fixture("ids_list2.json"), headers: {content_type: "application/json; charset=utf-8"})
-      stub_get("/2/users/lookup.json").with(query: {screen_name: "sferik,pengwynn"}).to_return(body: fixture("friendships.json"), headers: {content_type: "application/json; charset=utf-8"})
+      stub_get("/2/users/lookup.json").with(query: {username: "sferik,pengwynn"}).to_return(body: fixture("friendships.json"), headers: {content_type: "application/json; charset=utf-8"})
       stub_post("/2/friendships/create.json").with(body: {user_id: "7505382"}).to_return(body: fixture("sferik.json"), headers: {content_type: "application/json; charset=utf-8"})
     end
 
@@ -299,19 +299,19 @@ describe Twitter::REST::FriendsAndFollowers do
       @client.follow("sferik", "pengwynn")
       expect(a_get("/2/account/verify_credentials.json").with(query: {skip_status: "true"})).to have_been_made
       expect(a_get("/2/friends/ids.json").with(query: {user_id: "7505382", cursor: "-1"})).to have_been_made
-      expect(a_get("/2/users/lookup.json").with(query: {screen_name: "sferik,pengwynn"})).to have_been_made
+      expect(a_get("/2/users/lookup.json").with(query: {username: "sferik,pengwynn"})).to have_been_made
       expect(a_post("/2/friendships/create.json").with(body: {user_id: "7505382"})).to have_been_made
     end
   end
 
   describe "#follow!" do
     before do
-      stub_post("/2/friendships/create.json").with(body: {screen_name: "sferik"}).to_return(body: fixture("sferik.json"), headers: {content_type: "application/json; charset=utf-8"})
+      stub_post("/2/friendships/create.json").with(body: {username: "sferik"}).to_return(body: fixture("sferik.json"), headers: {content_type: "application/json; charset=utf-8"})
     end
 
     it "requests the correct resource" do
       @client.follow!("sferik")
-      expect(a_post("/2/friendships/create.json").with(body: {screen_name: "sferik"})).to have_been_made
+      expect(a_post("/2/friendships/create.json").with(body: {username: "sferik"})).to have_been_made
     end
 
     it "returns an array of befriended users" do
@@ -336,19 +336,19 @@ describe Twitter::REST::FriendsAndFollowers do
 
   context "with a URI object passed" do
     before do
-      stub_post("/2/friendships/create.json").with(body: {screen_name: "sferik"}).to_return(body: fixture("sferik.json"), headers: {content_type: "application/json; charset=utf-8"})
+      stub_post("/2/friendships/create.json").with(body: {username: "sferik"}).to_return(body: fixture("sferik.json"), headers: {content_type: "application/json; charset=utf-8"})
     end
 
     it "requests the correct resource" do
       user = URI.parse("https://twitter.com/sferik")
       @client.follow!(user)
-      expect(a_post("/2/friendships/create.json").with(body: {screen_name: "sferik"})).to have_been_made
+      expect(a_post("/2/friendships/create.json").with(body: {username: "sferik"})).to have_been_made
     end
   end
 
   context "with a forbidden error" do
     before do
-      stub_post("/2/friendships/create.json").with(body: {screen_name: "sferik"}).to_return(status: 403, body: fixture("forbidden.json"), headers: {content_type: "application/json; charset=utf-8"})
+      stub_post("/2/friendships/create.json").with(body: {username: "sferik"}).to_return(status: 403, body: fixture("forbidden.json"), headers: {content_type: "application/json; charset=utf-8"})
     end
 
     it "raises an exception" do
@@ -358,12 +358,12 @@ describe Twitter::REST::FriendsAndFollowers do
 
   describe "#unfollow" do
     before do
-      stub_post("/2/friendships/destroy.json").with(body: {screen_name: "sferik"}).to_return(body: fixture("sferik.json"), headers: {content_type: "application/json; charset=utf-8"})
+      stub_post("/2/friendships/destroy.json").with(body: {username: "sferik"}).to_return(body: fixture("sferik.json"), headers: {content_type: "application/json; charset=utf-8"})
     end
 
     it "requests the correct resource" do
       @client.unfollow("sferik")
-      expect(a_post("/2/friendships/destroy.json").with(body: {screen_name: "sferik"})).to have_been_made
+      expect(a_post("/2/friendships/destroy.json").with(body: {username: "sferik"})).to have_been_made
     end
 
     it "returns an array of unfollowed users" do
@@ -376,12 +376,12 @@ describe Twitter::REST::FriendsAndFollowers do
 
   describe "#friendship_update" do
     before do
-      stub_post("/2/friendships/update.json").with(body: {screen_name: "sferik", retweets: "true"}).to_return(body: fixture("following.json"), headers: {content_type: "application/json; charset=utf-8"})
+      stub_post("/2/friendships/update.json").with(body: {username: "sferik", retweets: "true"}).to_return(body: fixture("following.json"), headers: {content_type: "application/json; charset=utf-8"})
     end
 
     it "requests the correct resource" do
       @client.friendship_update("sferik", retweets: true)
-      expect(a_post("/2/friendships/update.json").with(body: {screen_name: "sferik", retweets: "true"})).to have_been_made
+      expect(a_post("/2/friendships/update.json").with(body: {username: "sferik", retweets: "true"})).to have_been_made
     end
 
     it "returns detailed information about the relationship between two users" do
@@ -394,12 +394,12 @@ describe Twitter::REST::FriendsAndFollowers do
   describe "#friendship" do
     context "with screen names passed" do
       before do
-        stub_get("/2/friendships/show.json").with(query: {source_screen_name: "sferik", target_screen_name: "pengwynn"}).to_return(body: fixture("following.json"), headers: {content_type: "application/json; charset=utf-8"})
+        stub_get("/2/friendships/show.json").with(query: {source_username: "sferik", target_username: "pengwynn"}).to_return(body: fixture("following.json"), headers: {content_type: "application/json; charset=utf-8"})
       end
 
       it "requests the correct resource" do
         @client.friendship("sferik", "pengwynn")
-        expect(a_get("/2/friendships/show.json").with(query: {source_screen_name: "sferik", target_screen_name: "pengwynn"})).to have_been_made
+        expect(a_get("/2/friendships/show.json").with(query: {source_username: "sferik", target_username: "pengwynn"})).to have_been_made
       end
 
       it "returns detailed information about the relationship between two users" do
@@ -411,12 +411,12 @@ describe Twitter::REST::FriendsAndFollowers do
 
     context "with numeric screen names passed" do
       before do
-        stub_get("/2/friendships/show.json").with(query: {source_screen_name: "0", target_screen_name: "311"}).to_return(body: fixture("following.json"), headers: {content_type: "application/json; charset=utf-8"})
+        stub_get("/2/friendships/show.json").with(query: {source_username: "0", target_username: "311"}).to_return(body: fixture("following.json"), headers: {content_type: "application/json; charset=utf-8"})
       end
 
       it "requests the correct resource" do
         @client.friendship("0", "311")
-        expect(a_get("/2/friendships/show.json").with(query: {source_screen_name: "0", target_screen_name: "311"})).to have_been_made
+        expect(a_get("/2/friendships/show.json").with(query: {source_username: "0", target_username: "311"})).to have_been_made
       end
     end
 
@@ -446,14 +446,14 @@ describe Twitter::REST::FriendsAndFollowers do
 
     context "with URI objects passed" do
       before do
-        stub_get("/2/friendships/show.json").with(query: {source_screen_name: "sferik", target_screen_name: "pengwynn"}).to_return(body: fixture("following.json"), headers: {content_type: "application/json; charset=utf-8"})
+        stub_get("/2/friendships/show.json").with(query: {source_username: "sferik", target_username: "pengwynn"}).to_return(body: fixture("following.json"), headers: {content_type: "application/json; charset=utf-8"})
       end
 
       it "requests the correct resource" do
         user1 = URI.parse("https://twitter.com/sferik")
         user2 = URI.parse("https://twitter.com/pengwynn")
         @client.friendship(user1, user2)
-        expect(a_get("/2/friendships/show.json").with(query: {source_screen_name: "sferik", target_screen_name: "pengwynn"})).to have_been_made
+        expect(a_get("/2/friendships/show.json").with(query: {source_username: "sferik", target_username: "pengwynn"})).to have_been_made
       end
     end
   end
@@ -461,13 +461,13 @@ describe Twitter::REST::FriendsAndFollowers do
   describe "#friendship?" do
     context "with screen names passed" do
       before do
-        stub_get("/2/friendships/show.json").with(query: {source_screen_name: "sferik", target_screen_name: "pengwynn"}).to_return(body: fixture("following.json"), headers: {content_type: "application/json; charset=utf-8"})
-        stub_get("/2/friendships/show.json").with(query: {source_screen_name: "pengwynn", target_screen_name: "sferik"}).to_return(body: fixture("not_following.json"), headers: {content_type: "application/json; charset=utf-8"})
+        stub_get("/2/friendships/show.json").with(query: {source_username: "sferik", target_username: "pengwynn"}).to_return(body: fixture("following.json"), headers: {content_type: "application/json; charset=utf-8"})
+        stub_get("/2/friendships/show.json").with(query: {source_username: "pengwynn", target_username: "sferik"}).to_return(body: fixture("not_following.json"), headers: {content_type: "application/json; charset=utf-8"})
       end
 
       it "requests the correct resource" do
         @client.friendship?("sferik", "pengwynn")
-        expect(a_get("/2/friendships/show.json").with(query: {source_screen_name: "sferik", target_screen_name: "pengwynn"})).to have_been_made
+        expect(a_get("/2/friendships/show.json").with(query: {source_username: "sferik", target_username: "pengwynn"})).to have_been_made
       end
 
       it "returns true if user A follows user B" do
@@ -507,14 +507,14 @@ describe Twitter::REST::FriendsAndFollowers do
   end
 
   describe "#followers" do
-    context "with a screen_name passed" do
+    context "with a username passed" do
       before do
-        stub_get("/2/followers/list.json").with(query: {screen_name: "sferik", cursor: "-1"}).to_return(body: fixture("followers_list.json"), headers: {content_type: "application/json; charset=utf-8"})
+        stub_get("/2/followers/list.json").with(query: {username: "sferik", cursor: "-1"}).to_return(body: fixture("followers_list.json"), headers: {content_type: "application/json; charset=utf-8"})
       end
 
       it "requests the correct resource" do
         @client.followers("sferik")
-        expect(a_get("/2/followers/list.json").with(query: {screen_name: "sferik", cursor: "-1"})).to have_been_made
+        expect(a_get("/2/followers/list.json").with(query: {username: "sferik", cursor: "-1"})).to have_been_made
       end
 
       it "returns a cursor of followers with details for every user the specified user is followed by" do
@@ -525,13 +525,13 @@ describe Twitter::REST::FriendsAndFollowers do
 
       context "with each" do
         before do
-          stub_get("/2/followers/list.json").with(query: {screen_name: "sferik", cursor: "1419103567112105362"}).to_return(body: fixture("followers_list2.json"), headers: {content_type: "application/json; charset=utf-8"})
+          stub_get("/2/followers/list.json").with(query: {username: "sferik", cursor: "1419103567112105362"}).to_return(body: fixture("followers_list2.json"), headers: {content_type: "application/json; charset=utf-8"})
         end
 
         it "requests the correct resource" do
           @client.followers("sferik").each {}
-          expect(a_get("/2/followers/list.json").with(query: {screen_name: "sferik", cursor: "-1"})).to have_been_made
-          expect(a_get("/2/followers/list.json").with(query: {screen_name: "sferik", cursor: "1419103567112105362"})).to have_been_made
+          expect(a_get("/2/followers/list.json").with(query: {username: "sferik", cursor: "-1"})).to have_been_made
+          expect(a_get("/2/followers/list.json").with(query: {username: "sferik", cursor: "1419103567112105362"})).to have_been_made
         end
       end
     end
@@ -593,14 +593,14 @@ describe Twitter::REST::FriendsAndFollowers do
   end
 
   describe "#friends" do
-    context "with a screen_name passed" do
+    context "with a username passed" do
       before do
-        stub_get("/2/friends/list.json").with(query: {screen_name: "sferik", cursor: "-1"}).to_return(body: fixture("friends_list.json"), headers: {content_type: "application/json; charset=utf-8"})
+        stub_get("/2/friends/list.json").with(query: {username: "sferik", cursor: "-1"}).to_return(body: fixture("friends_list.json"), headers: {content_type: "application/json; charset=utf-8"})
       end
 
       it "requests the correct resource" do
         @client.friends("sferik")
-        expect(a_get("/2/friends/list.json").with(query: {screen_name: "sferik", cursor: "-1"})).to have_been_made
+        expect(a_get("/2/friends/list.json").with(query: {username: "sferik", cursor: "-1"})).to have_been_made
       end
 
       it "returns a cursor of friends with details for every user the specified user is following" do
@@ -611,13 +611,13 @@ describe Twitter::REST::FriendsAndFollowers do
 
       context "with each" do
         before do
-          stub_get("/2/friends/list.json").with(query: {screen_name: "sferik", cursor: "1418947360875712729"}).to_return(body: fixture("friends_list2.json"), headers: {content_type: "application/json; charset=utf-8"})
+          stub_get("/2/friends/list.json").with(query: {username: "sferik", cursor: "1418947360875712729"}).to_return(body: fixture("friends_list2.json"), headers: {content_type: "application/json; charset=utf-8"})
         end
 
         it "requests the correct resource" do
           @client.friends("sferik").each {}
-          expect(a_get("/2/friends/list.json").with(query: {screen_name: "sferik", cursor: "-1"})).to have_been_made
-          expect(a_get("/2/friends/list.json").with(query: {screen_name: "sferik", cursor: "1418947360875712729"})).to have_been_made
+          expect(a_get("/2/friends/list.json").with(query: {username: "sferik", cursor: "-1"})).to have_been_made
+          expect(a_get("/2/friends/list.json").with(query: {username: "sferik", cursor: "1418947360875712729"})).to have_been_made
         end
       end
     end

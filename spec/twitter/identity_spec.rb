@@ -9,8 +9,8 @@ describe Twitter::Identity do
 
   describe "#==" do
     it "returns true when objects IDs are the same" do
-      one = described_class.new(id: 1, screen_name: "sferik")
-      two = described_class.new(id: 1, screen_name: "garybernhardt")
+      one = described_class.new(id: 1, username: "sferik")
+      two = described_class.new(id: 1, username: "garybernhardt")
       expect(one == two).to be true
     end
 

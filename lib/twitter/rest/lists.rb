@@ -95,12 +95,12 @@ module Twitter
       # @overload memberships(options = {})
       #   @param options [Hash] A customizable set of options.
       #   @option options [Integer] :count The amount of results to return per page. Defaults to 20. No more than 1000 results will ever be returned in a single page.
-      #   @option options [Boolean, String, Integer] :filter_to_owned_lists When set to true, t or 1, will return just lists the authenticating user owns, and the user represented by user_id or screen_name is a member of.
+      #   @option options [Boolean, String, Integer] :filter_to_owned_lists When set to true, t or 1, will return just lists the authenticating user owns, and the user represented by user_id or username is a member of.
       # @overload memberships(user, options = {})
       #   @param user [Integer, String, Twitter::User] A Twitter user ID, screen name, URI, or object.
       #   @param options [Hash] A customizable set of options.
       #   @option options [Integer] :count The amount of results to return per page. Defaults to 20. No more than 1000 results will ever be returned in a single page.
-      #   @option options [Boolean, String, Integer] :filter_to_owned_lists When set to true, t or 1, will return just lists the authenticating user owns, and the user represented by user_id or screen_name is a member of.
+      #   @option options [Boolean, String, Integer] :filter_to_owned_lists When set to true, t or 1, will return just lists the authenticating user owns, and the user represented by user_id or username is a member of.
       def memberships(*args)
         cursor_from_response_with_user(:lists, Twitter::List, "/2/lists/memberships.json", args)
       end
@@ -469,7 +469,7 @@ module Twitter
       def merge_slug_and_owner!(hash, path)
         list = path.split("/")
         hash[:slug] = list.pop
-        hash[:owner_screen_name] = list.pop unless list.empty?
+        hash[:owner_username] = list.pop unless list.empty?
       end
 
       def merge_list_and_owner!(hash, list)
@@ -480,10 +480,10 @@ module Twitter
       # Take an owner and merge it into the hash with the correct key
       #
       # @param hash [Hash]
-      # @param user[Integer, String, Twitter::User] A Twitter user ID, screen_name, or object.
+      # @param user[Integer, String, Twitter::User] A Twitter user ID, username, or object.
       # @return [Hash]
       def merge_owner!(hash, user)
-        return hash if hash[:owner_id] || hash[:owner_screen_name]
+        return hash if hash[:owner_id] || hash[:owner_username]
 
         if user
           merge_user!(hash, user, "owner")

@@ -217,7 +217,7 @@ describe Twitter::DirectMessage do
     it "returns an array of Entity::UserMention when entities are set" do
       user_mentions_array = [
         {
-          screen_name: "sferik",
+          username: "sferik",
           name: "Erik Berlin",
           id_str: "7_505_382",
           indices: [0, 6],

@@ -52,7 +52,7 @@ module Twitter
     # @param size [String, Symbol] The size of the image. Must be one of: 'mini', 'normal', 'bigger' or 'original'
     # @return [Addressable::URI]
     def profile_image_uri(size = :normal)
-      parse_uri(insecure_uri(profile_image_uri_https(size))) unless @attrs[:profile_image_url_https].nil?
+      @attrs[:profile_image_url]
     end
     alias profile_image_url profile_image_uri
 
