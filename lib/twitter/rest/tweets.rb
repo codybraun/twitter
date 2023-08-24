@@ -61,7 +61,7 @@ module Twitter
       # @param options [Hash] A customizable set of options.
       # @option options [Boolean, String, Integer] :trim_user Each tweet returned in a timeline will include a user object with only the author's numerical ID when set to true, 't' or 1.
       def status(tweet, options = {})
-        perform_get_with_object("/2/statuses/show/#{extract_id(tweet)}.json", options, Twitter::Tweet)
+        perform_get_with_object("/2/tweets/#{extract_id(tweet)}", options, Twitter::Tweet)
       end
 
       # Returns Tweets
@@ -335,7 +335,8 @@ module Twitter
       end
 
       def post_retweet(tweet, options)
-        response = perform_post("/2/statuses/retweet/#{extract_id(tweet)}.json", options)
+        options[:tweet_id] = extract_id(tweet).to_s
+        response = perform_json_post("/2/users/#{user_id}/retweets", options)
         Twitter::Tweet.new(response)
       end
 

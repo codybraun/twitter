@@ -43,6 +43,10 @@ module Twitter
         perform_request(:post, path, options)
       end
 
+      def perform_json_post(path, options = {})
+        perform_request(:json_post, path, options)
+      end
+
       # @param request_method [Symbol]
       # @param path [String]
       # @param options [Hash]
@@ -180,7 +184,7 @@ module Twitter
       end
 
       def user_id
-        @user_id ||= verify_credentials(skip_status: true).id
+        @user_id ||= verify_credentials().id
       end
 
       def user_id?
