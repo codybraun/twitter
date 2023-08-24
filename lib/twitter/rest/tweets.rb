@@ -337,6 +337,7 @@ module Twitter
       def post_retweet(tweet, options)
         options[:tweet_id] = extract_id(tweet).to_s
         response = perform_json_post("/2/users/#{user_id}/retweets", options)
+        response[:id] = options[:tweet_id]
         Twitter::Tweet.new(response)
       end
 
