@@ -50,7 +50,7 @@ module Twitter
       # @param options [Hash] A customizable set of options.
       # @option options [Boolean, String, Integer] :skip_status Do not include user's Tweets when set to true, 't' or 1.
       def verify_credentials(options = {})
-        perform_get_with_object("/2/users/me?user.fields=profile_image_url,username", options, Twitter::User)
+        perform_get_with_object("/2/users/me?user.fields=profile_image_url,username,public_metrics", options, Twitter::User)
       end
 
       # Sets which device Twitter delivers updates to for the authenticating user
