@@ -103,17 +103,6 @@ module Twitter
       #   @param users [Enumerable<Integer, String, Twitter::User>] A collection of Twitter user IDs, screen names, or objects.
       #   @param options [Hash] A customizable set of options.
       #   @option options [Boolean] :follow (false) Enable notifications for the target user.
-      def follow(*args)
-        arguments = Twitter::Arguments.new(args)
-        existing_friends = Thread.new do
-          friend_ids.to_a
-        end
-        new_friends = Thread.new do
-          users(args).collect(&:id)
-        end
-        follow!(new_friends.value - existing_friends.value, arguments.options)
-      end
-      alias create_friendship follow
 
       # Allows the authenticating user to follow the specified users
       #
@@ -128,13 +117,15 @@ module Twitter
       #   @param users [Enumerable<Integer, String, Twitter::User>] A collection of Twitter user IDs, screen names, or objects.
       #   @param options [Hash] A customizable set of options.
       #   @option options [Boolean] :follow (false) Enable notifications for the target user.
-      def follow!(*args)
-        arguments = Twitter::Arguments.new(args)
-        pmap(arguments) do |user|
-          perform_post_with_object("/2/friendships/create.json", merge_user(arguments.options, user), Twitter::User)
-        end.compact
-      end
-      alias create_friendship! follow!
+      def follow(user)
+        if user[:user_id]
+          id = user[:user_id]
+          perform_json_post("/2/users/#{id}/following", {})
+        elsif user[:handle]
+          id = perform_get("/2/users/by/username/#{user[:handle]}", {})[:data][:id]
+          perform_json_post("/2/users/#{user_id}/following", {target_user_id: id})
+        end
+    end
 
       # Allows the authenticating user to unfollow the specified users
       #
